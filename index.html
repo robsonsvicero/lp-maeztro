@@ -1,67 +1,908 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GestFors — Em construção</title>
-<link rel="icon" type="image/png" href="logo_vertical.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAEZTRO Gestão — Aplicativo de Gestão para Professores de Música</title>
+  <meta name="description" content="Organize sua agenda de aulas particulares, controle mensalidades e tenha previsibilidade financeira sem planilhas confusas. Teste gratuito por 14 dias.">
+  <link rel="canonical" href="https://maeztrogestao.com.br">
+  <meta property="og:title" content="MAEZTRO Gestão — Aplicativo para Professores de Música">
+  <meta property="og:description" content="Organize suas aulas particulares, alunos e mensalidades em um painel simples e sem planilhas.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="./logo-maeztro.png">
 
-  <div class="blocks" aria-hidden="true">
-    <span class="block b1"></span>
-    <span class="block b2"></span>
-    <span class="block b3"></span>
-    <span class="block b4"></span>
-    <span class="block b5"></span>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./logo-maeztro.png">
+
+  <!-- Geist Font from CDN -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-mono/style.css">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Geist', 'sans-serif'],
+            mono: ['Geist Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              DEFAULT: '#1B4166',
+              dark: '#122c45',
+              light: '#235382',
+              positive: '#9DC3DE',
+              positiveSoft: '#eaf3f9',
+              slate: '#4A6278',
+              muted: '#64748b',
+              border: '#E2E8F0',
+              cardBg: '#FFFFFF',
+              surface: '#F8FAFC',
+            }
+          },
+          boxShadow: {
+            'subtle': '0 4px 20px -2px rgba(27, 65, 102, 0.05)',
+            'card': '0 10px 30px -4px rgba(27, 65, 102, 0.08)',
+            'floating': '0 20px 40px -8px rgba(27, 65, 102, 0.12)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Estilos customizados da Landing Page -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="relative min-h-screen bg-white text-slate-800 selection:bg-brand-positiveSoft selection:text-brand">
+
+  <!-- Acessibilidade: Skip to Content -->
+  <a href="#conteudo-principal" class="skip-to-content fixed -top-40 left-4 bg-brand text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-lg focus:outline-none focus:ring-2 focus:ring-brand">
+    Pular para o conteúdo principal
+  </a>
+
+  <!-- 1. Navegação Compacta: Island Nav Floating Pill -->
+  <header class="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-6 pointer-events-none">
+    <nav class="pointer-events-auto flex items-center justify-between gap-6 px-6 py-3 bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-full shadow-subtle max-w-4xl w-full transition-all duration-700 ease-spring" aria-label="Navegação Principal">
+      <a href="#" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-brand rounded-full pr-2" aria-label="MAEZTRO Gestão - Início">
+        <img src="./logo-maeztro.png" alt="Logo MAEZTRO Gestão" class="h-9 w-auto object-contain transition-transform duration-700 ease-spring group-hover:scale-105">
+        
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-6">
+        <a href="#dores" class="text-sm font-medium text-slate-600 hover:text-brand transition-colors duration-700 ease-spring focus:outline-none focus:ring-2 focus:ring-brand rounded px-1">Dores</a>
+        <a href="#beneficios" class="text-sm font-medium text-slate-600 hover:text-brand transition-colors duration-700 ease-spring focus:outline-none focus:ring-2 focus:ring-brand rounded px-1">Benefícios</a>
+        <a href="#como-funciona" class="text-sm font-medium text-slate-600 hover:text-brand transition-colors duration-700 ease-spring focus:outline-none focus:ring-2 focus:ring-brand rounded px-1">Como funciona</a>
+        <a href="#painel" class="text-sm font-medium text-slate-600 hover:text-brand transition-colors duration-700 ease-spring focus:outline-none focus:ring-2 focus:ring-brand rounded px-1">Painel</a>
+        <a href="#faq" class="text-sm font-medium text-slate-600 hover:text-brand transition-colors duration-700 ease-spring focus:outline-none focus:ring-2 focus:ring-brand rounded px-1">FAQ</a>
+      </div>
+
+      <!-- CTA Nav -->
+      <div class="flex items-center gap-3">
+        <a href="#formulario" class="inline-flex items-center justify-center bg-brand hover:bg-brand-dark active:scale-[0.98] text-white text-sm font-semibold px-4 py-2 rounded-full transition-all duration-700 ease-spring focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 shadow-sm">
+          Teste gratuito por 14 dias
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="menu-toggle" type="button" class="md:hidden flex flex-col justify-center items-center w-9 h-9 rounded-full border border-slate-200 text-brand focus:outline-none focus:ring-2 focus:ring-brand" aria-label="Abrir menu de navegação" aria-expanded="false">
+          <span class="w-4 h-0.5 bg-brand rounded-full transition-all duration-500 origin-center" id="bar1"></span>
+          <span class="w-4 h-0.5 bg-brand rounded-full my-1 transition-all duration-500 origin-center" id="bar2"></span>
+          <span class="w-4 h-0.5 bg-brand rounded-full transition-all duration-500 origin-center" id="bar3"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Overlay Menu (Staggered mask reveal) -->
+  <div id="mobile-menu" class="fixed inset-0 z-40 bg-white/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 opacity-0 pointer-events-none transition-all duration-700 ease-spring md:hidden" aria-hidden="true">
+    <div class="flex flex-col items-center gap-6 text-center">
+      <a href="#dores" class="mobile-nav-link text-xl font-semibold text-slate-800 hover:text-brand transition-all transform translate-y-8 opacity-0">Dores</a>
+      <a href="#beneficios" class="mobile-nav-link text-xl font-semibold text-slate-800 hover:text-brand transition-all transform translate-y-8 opacity-0">Benefícios</a>
+      <a href="#como-funciona" class="mobile-nav-link text-xl font-semibold text-slate-800 hover:text-brand transition-all transform translate-y-8 opacity-0">Como funciona</a>
+      <a href="#painel" class="mobile-nav-link text-xl font-semibold text-slate-800 hover:text-brand transition-all transform translate-y-8 opacity-0">Painel do professor</a>
+      <a href="#faq" class="mobile-nav-link text-xl font-semibold text-slate-800 hover:text-brand transition-all transform translate-y-8 opacity-0">Dúvidas frequentes</a>
+      <div class="pt-4 mobile-nav-link transform translate-y-8 opacity-0">
+        <a href="#formulario" class="inline-flex items-center justify-center bg-brand text-white text-base font-semibold px-6 py-3 rounded-full shadow-md">
+          Teste gratuito por 14 dias
+        </a>
+      </div>
+    </div>
   </div>
 
-  <main class="stage">
-    <img class="logo" src="logo_vertical.png" alt="GestFors">
+  <main id="conteudo-principal" class="pt-28 md:pt-36">
 
-    <p class="eyebrow">estamos construindo algo novo</p>
+    <!-- 2. HERO SECTION -->
+    <section class="px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center reveal-elem">
+      <!-- Badge de Lançamento -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-200 bg-brand-surface mb-6 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-brand"></span>
+        <span class="text-xs font-semibold uppercase tracking-wider text-brand">Lançamento oficial</span>
+        <span class="text-xs text-slate-400">|</span>
+        <span class="text-xs text-slate-600 font-medium">Software para professores de música</span>
+      </div>
 
-    <h1>O site está em construção</h1>
+      <!-- Headline: max 680px, quebra com sentido -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight max-w-[680px] mx-auto hero-text-gradient mb-6 leading-tight" style="text-wrap: balance;">
+        Suas aulas em harmonia, sua rotina financeira sob controle
+      </h1>
 
-    <p class="lead">
-      Em breve você poderá conhecer a GestFors por aqui. Enquanto isso, fale
-      com a gente diretamente.
-    </p>
+      <!-- Subheadline: max 680px -->
+      <p class="text-lg sm:text-xl text-slate-600 font-normal max-w-[680px] mx-auto mb-8 leading-relaxed" style="text-wrap: pretty;">
+        Chega de anotações soltas no WhatsApp e cobranças constrangedoras. Organize alunos, horários e mensalidades em um só lugar.
+      </p>
 
-    <div class="actions">
-      <a
-        class="btn btn-whatsapp"
-        href="https://wa.me/5511964932007"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <svg viewBox="0 0 24 24" class="icon" fill="currentColor" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-          <path d="M12.004 2.003c-5.514 0-9.997 4.483-9.997 9.997 0 1.763.462 3.486 1.34 5.004l-1.423 5.198 5.325-1.397a9.96 9.96 0 0 0 4.755 1.211h.004c5.514 0 9.997-4.483 9.997-9.997 0-2.671-1.04-5.182-2.929-7.071a9.935 9.935 0 0 0-7.072-2.945zm0 18.187h-.003a8.19 8.19 0 0 1-4.173-1.14l-.299-.178-3.16.829.843-3.078-.194-.316a8.171 8.171 0 0 1-1.256-4.36c0-4.518 3.677-8.194 8.196-8.194a8.14 8.14 0 0 1 5.795 2.406 8.14 8.14 0 0 1 2.397 5.795c-.001 4.518-3.678 8.236-8.146 8.236z"/>
-        </svg>
-        <span>Falar no WhatsApp</span>
-      </a>
+      <!-- Primary CTA + Risk Reversal -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+        <a href="#formulario" class="w-full sm:w-auto inline-flex items-center justify-center bg-brand hover:bg-brand-dark active:scale-[0.98] text-white text-base font-semibold px-8 py-3 rounded-xl transition-all duration-700 ease-spring shadow-card focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2">
+          Teste gratuito por 14 dias
+        </a>
+      </div>
 
-      <a class="btn btn-email" href="mailto:ola@gestfors.com.br">
-        <svg viewBox="0 0 24 24" class="icon" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-          <rect x="3" y="5" width="18" height="14" rx="2"/>
-          <path d="M3.5 6.5 12 13l8.5-6.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>ola@gestfors.com.br</span>
-      </a>
-    </div>
+      <!-- Proof Signal / Risk Reversal Badge -->
+      <div class="flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-500 font-medium mb-12">
+        <span class="inline-flex items-center gap-1.5">
+          <i class="ph-bold ph-shield-check text-[#1B4166] text-base"></i>
+          Sem cartão de crédito
+        </span>
+        <span class="text-slate-300">•</span>
+        <span class="inline-flex items-center gap-1.5">
+          <i class="ph-bold ph-clock text-[#1B4166] text-base"></i>
+          Configuração em 5 minutos
+        </span>
+        <span class="text-slate-300">•</span>
+        <span class="inline-flex items-center gap-1.5">
+          <i class="ph-bold ph-x-circle text-[#1B4166] text-base"></i>
+          Cancele quando quiser
+        </span>
+      </div>
+
+      <!-- Product Mockup Visual: Detalhado, limpo, border discreta, nested radii -->
+      <div class="relative max-w-5xl mx-auto rounded-2xl p-2 sm:p-4 bg-slate-100/70 border border-slate-200/80 shadow-floating text-left">
+        <!-- Window frame bar -->
+        <div class="flex items-center justify-between px-3 py-2 border-b border-slate-200/80 bg-white rounded-t-xl">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-slate-200 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-slate-200 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-slate-200 inline-block"></span>
+            <span class="ml-2 text-xs font-medium text-slate-400">app.maeztrogestao.com.br/painel</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-[#eaf3f9] text-[#1B4166]">
+              <i class="ph-bold ph-check-circle text-xs text-[#9DC3DE]"></i> Sistema online
+            </span>
+          </div>
+        </div>
+
+        <!-- Inner dashboard container (nested radius: 16px - 8px = 8px/rounded-lg) -->
+        <div class="bg-white rounded-b-xl p-4 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-6">
+          
+          <!-- Sidebar Mockup -->
+          <div class="hidden md:flex md:col-span-3 flex-col justify-between border-r border-slate-100 pr-4">
+            <div class="space-y-4">
+              <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
+                <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center text-white font-bold text-sm">
+                  M
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-800">Studio Musical Silva</div>
+                  <div class="text-[10px] text-slate-500">Piano e Teclado</div>
+                </div>
+              </div>
+              <div class="space-y-1 text-xs font-medium">
+                <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#eaf3f9] text-[#1B4166] font-semibold">
+                  <i class="ph-bold ph-squares-four text-sm"></i> Visão Geral
+                </div>
+                <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">
+                  <i class="ph-bold ph-calendar text-sm"></i> Agenda de Aulas
+                </div>
+                <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">
+                  <i class="ph-bold ph-users text-sm"></i> Alunos Ativos
+                </div>
+                <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">
+                  <i class="ph-bold ph-wallet text-sm"></i> Mensalidades
+                </div>
+                <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50">
+                  <i class="ph-bold ph-receipt text-sm"></i> Despesas
+                </div>
+              </div>
+            </div>
+
+            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100">
+              <div class="text-[11px] font-semibold text-slate-700">Período de teste</div>
+              <div class="text-[10px] text-slate-500 mb-2">14 dias restantes</div>
+              <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-[#9DC3DE] h-full w-full"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Dashboard Mockup Content -->
+          <div class="col-span-12 md:col-span-9 space-y-6">
+            <!-- Stat Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="p-4 rounded-xl border border-slate-100 bg-brand-surface">
+                <div class="flex items-center justify-between text-xs text-slate-500 font-medium mb-1">
+                  <span>Mensalidades Recebidas</span>
+                  <span class="w-2 h-2 rounded-full bg-[#9DC3DE]" title="Em dia"></span>
+                </div>
+                <div class="text-2xl font-bold text-[#1B4166] font-mono">R$ 4.850,00</div>
+                <div class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+                  <i class="ph-bold ph-arrow-up-right text-[#9DC3DE]"></i> 24 de 28 alunos pagos
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl border border-slate-100 bg-brand-surface">
+                <div class="flex items-center justify-between text-xs text-slate-500 font-medium mb-1">
+                  <span>A Receber no Mês</span>
+                  <i class="ph-bold ph-clock text-slate-400"></i>
+                </div>
+                <div class="text-2xl font-bold text-slate-700 font-mono">R$ 820,00</div>
+                <div class="text-[11px] text-slate-500 mt-1">
+                  4 mensalidades pendentes
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl border border-slate-100 bg-brand-surface">
+                <div class="flex items-center justify-between text-xs text-slate-500 font-medium mb-1">
+                  <span>Aulas Agendadas Hoje</span>
+                  <i class="ph-bold ph-music-notes text-brand"></i>
+                </div>
+                <div class="text-2xl font-bold text-brand font-mono">6 aulas</div>
+                <div class="text-[11px] text-slate-500 mt-1">
+                  Próxima às 14:00 (Violão)
+                </div>
+              </div>
+            </div>
+
+            <!-- Schedule + Student Table Snapshot -->
+            <div class="border border-slate-100 rounded-xl overflow-hidden">
+              <div class="px-4 py-3 bg-slate-50/70 border-b border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-700">Agenda do Dia — Quarta-feira</span>
+                <span class="text-[11px] font-medium text-brand">Ver calendário completo →</span>
+              </div>
+              <div class="divide-y divide-slate-100 text-xs">
+                <div class="px-4 py-3 flex items-center justify-between bg-white hover:bg-slate-50/50">
+                  <div class="flex items-center gap-3">
+                    <span class="font-mono text-slate-500 font-medium">14:00</span>
+                    <div>
+                      <div class="font-semibold text-slate-800">Mariana Costa</div>
+                      <div class="text-[10px] text-slate-500">Violão Clássico • Módulo II</div>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-[#eaf3f9] text-[#1B4166] border border-[#9DC3DE]/40">
+                    Mensalidade Paga
+                  </span>
+                </div>
+
+                <div class="px-4 py-3 flex items-center justify-between bg-white hover:bg-slate-50/50">
+                  <div class="flex items-center gap-3">
+                    <span class="font-mono text-slate-500 font-medium">15:00</span>
+                    <div>
+                      <div class="font-semibold text-slate-800">Lucas Silveira</div>
+                      <div class="text-[10px] text-slate-500">Teclado e Harmonia • Módulo I</div>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-[#eaf3f9] text-[#1B4166] border border-[#9DC3DE]/40">
+                    Mensalidade Paga
+                  </span>
+                </div>
+
+                <div class="px-4 py-3 flex items-center justify-between bg-white hover:bg-slate-50/50">
+                  <div class="flex items-center gap-3">
+                    <span class="font-mono text-slate-500 font-medium">16:30</span>
+                    <div>
+                      <div class="font-semibold text-slate-800">Beatriz Mendes</div>
+                      <div class="text-[10px] text-slate-500">Canto e Técnica Vocal • Avançado</div>
+                    </div>
+                  </div>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                    Vence hoje
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PRINCIPAIS DORES DO PROFESSOR (MEI / AUTÔNOMO) -->
+    <section id="dores" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto reveal-elem">
+      <div class="text-center max-w-[680px] mx-auto mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand mb-2">Desafios Reais</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight" style="text-wrap: balance;">
+          Dar aula é a sua paixão. Mas a desorganização consome o seu tempo
+        </h3>
+        <p class="mt-4 text-base sm:text-lg text-slate-600 font-normal" style="text-wrap: pretty;">
+          Professores de música perdem horas toda semana tentando conciliar anotações no caderno, mensagens perdidas e cobranças desconfortáveis.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Dor 1 -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white shadow-subtle flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-brand text-2xl mb-6">
+              <i class="ph-bold ph-chat-centered-text"></i>
+            </div>
+            <h4 class="text-xl font-semibold text-slate-900 mb-3">Mensagens perdidas no WhatsApp</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              O aluno desmarca em cima da hora, outro pede reposição e você não lembra qual horário estava livre. O resultado são horários vagos e perda de receita.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500">
+            Falta de agenda centralizada
+          </div>
+        </div>
+
+        <!-- Dor 2 -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white shadow-subtle flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-brand text-2xl mb-6">
+              <i class="ph-bold ph-hand-coins"></i>
+            </div>
+            <h4 class="text-xl font-semibold text-slate-900 mb-3">Constrangimento na cobrança</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Cobrar aluno atrasado pelo direct ou WhatsApp é desgastante. Sem um controle claro de vencimentos, você esquece quem pagou e fica sem saber quanto vai receber.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500">
+            Inadimplência invisível
+          </div>
+        </div>
+
+        <!-- Dor 3 -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white shadow-subtle flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-brand text-2xl mb-6">
+              <i class="ph-bold ph-table"></i>
+            </div>
+            <h4 class="text-xl font-semibold text-slate-900 mb-3">Planilhas manuais que ninguém preenche</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Planilhas complexas no computador dão preguiça de atualizar pelo celular entre uma aula e outra. No fim do mês, as contas nunca batem.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500">
+            Zero previsibilidade financeira
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. BENEFÍCIOS -->
+    <section id="beneficios" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto reveal-elem">
+      <div class="text-center max-w-[680px] mx-auto mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand mb-2">Benefícios Práticos</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight" style="text-wrap: balance;">
+          Tudo o que você precisa para gerenciar suas aulas em poucos toques
+        </h3>
+        <p class="mt-4 text-base sm:text-lg text-slate-600 font-normal" style="text-wrap: pretty;">
+          Construído especificamente para a rotina dinâmica de quem vive de ensinar música.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Benefício 1 -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white shadow-subtle flex gap-5 items-start">
+          <div class="w-12 h-12 rounded-xl bg-brand-positiveSoft flex-shrink-0 flex items-center justify-center text-brand text-2xl">
+            <i class="ph-bold ph-calendar-check"></i>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-slate-900 mb-2">Agenda clara de aulas e horários</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Consulte seu dia e sua semana instantaneamente no celular. Saiba quem é o próximo aluno, modalidade da aula e histórico de presenças.
+            </p>
+          </div>
+        </div>
+
+        <!-- Benefício 2 -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white shadow-subtle flex gap-5 items-start">
+          <div class="w-12 h-12 rounded-xl bg-brand-positiveSoft flex-shrink-0 flex items-center justify-center text-brand text-2xl">
+            <i class="ph-bold ph-identification-card"></i>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-slate-900 mb-2">Ficha completa de cada aluno</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Guarde contatos, instrumentos, repertório em andamento e observações pedagógicas. Tudo acessível sem precisar vasculhar conversas antigas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Benefício 3 -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white shadow-subtle flex gap-5 items-start">
+          <div class="w-12 h-12 rounded-xl bg-brand-positiveSoft flex-shrink-0 flex items-center justify-center text-brand text-2xl">
+            <i class="ph-bold ph-currency-circle-dollar"></i>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-slate-900 mb-2">Controle rigoroso de mensalidades</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Visualize em segundos quem já pagou, quem está em aberto e envie lembretes cordiais sem atritos nem desconforto.
+            </p>
+          </div>
+        </div>
+
+        <!-- Benefício 4 -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white shadow-subtle flex gap-5 items-start">
+          <div class="w-12 h-12 rounded-xl bg-brand-positiveSoft flex-shrink-0 flex items-center justify-center text-brand text-2xl">
+            <i class="ph-bold ph-chart-line-up"></i>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-slate-900 mb-2">Previsibilidade de receitas e despesas</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Saiba exatamente quanto você vai faturar no próximo mês e registre despesas básicas com cordas, palhetas, partituras e deslocamento.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. COMO FUNCIONA EM TRÊS PASSOS -->
+    <section id="como-funciona" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-slate-100 reveal-elem">
+      <div class="text-center max-w-[680px] mx-auto mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand mb-2">Simplicidade na Prática</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight" style="text-wrap: balance;">
+          Comece a organizar suas aulas em três etapas simples
+        </h3>
+        <p class="mt-4 text-base sm:text-lg text-slate-600 font-normal" style="text-wrap: pretty;">
+          Sem manuais complicados ou implantações demoradas. O sistema está pronto para uso imediato.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+        <!-- Passo 1 -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white shadow-subtle relative">
+          <div class="w-10 h-10 rounded-full bg-brand text-white flex items-center justify-center font-bold text-sm mb-6 font-mono">
+            01
+          </div>
+          <h4 class="text-xl font-semibold text-slate-900 mb-2">Cadastre seus alunos</h4>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Informe o nome do aluno, dia e horário fixo da aula, valor acordado da mensalidade e data de vencimento.
+          </p>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white shadow-subtle relative">
+          <div class="w-10 h-10 rounded-full bg-brand text-white flex items-center justify-center font-bold text-sm mb-6 font-mono">
+            02
+          </div>
+          <h4 class="text-xl font-semibold text-slate-900 mb-2">Consulte a agenda diária</h4>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Abra o app no celular ao acordar e tenha uma visão clara da sua grade de aulas, salas e confirmações.
+          </p>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white shadow-subtle relative">
+          <div class="w-10 h-10 rounded-full bg-brand text-white flex items-center justify-center font-bold text-sm mb-6 font-mono">
+            03
+          </div>
+          <h4 class="text-xl font-semibold text-slate-900 mb-2">Acompanhe seu financeiro</h4>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Dê baixa nos pagamentos com um clique e veja o saldo projetado do mês crescer sem surpresas de caixa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. PAINEL VISUAL: IMPOSTOS, DOCUMENTOS E CALENDÁRIO -->
+    <section id="painel" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto reveal-elem">
+      <div class="text-center max-w-[680px] mx-auto mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand mb-2">Recursos Integrados</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight" style="text-wrap: balance;">
+          Controle de rotina completo em um único ambiente
+        </h3>
+        <p class="mt-4 text-base sm:text-lg text-slate-600 font-normal" style="text-wrap: pretty;">
+          Mantenha recibos de pagamento, declarações de frequência, guias MEI e seu calendário sincronizados.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Card 1: Calendário de Aulas -->
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-subtle flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold text-brand uppercase tracking-wider">Agenda</span>
+              <i class="ph-bold ph-calendar text-brand text-xl"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-slate-900 mb-2">Calendário Inteligente de Aulas</h4>
+            <p class="text-sm text-slate-600 mb-6 leading-relaxed">
+              Visualize horários disponíveis, reposições pendentes e feriados escolares sem risco de conflito de agenda.
+            </p>
+          </div>
+          <!-- Mini UI Mock -->
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs space-y-2">
+            <div class="flex justify-between items-center py-1 border-b border-slate-200/60 font-medium text-slate-700">
+              <span>Segunda 15:00</span>
+              <span class="text-[#1B4166] font-semibold">Gabriel (Bateria)</span>
+            </div>
+            <div class="flex justify-between items-center py-1 font-medium text-slate-700">
+              <span>Terça 16:30</span>
+              <span class="text-[#1B4166] font-semibold">Ana Paula (Flauta)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Documentos e Recibos -->
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-subtle flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold text-brand uppercase tracking-wider">Documentos</span>
+              <i class="ph-bold ph-files text-brand text-xl"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-slate-900 mb-2">Recibos e Comprovantes</h4>
+            <p class="text-sm text-slate-600 mb-6 leading-relaxed">
+              Emita comprovantes de pagamento e recibos de mensalidade em formato PDF para enviar diretamente pelo WhatsApp do responsável.
+            </p>
+          </div>
+          <!-- Mini UI Mock -->
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs space-y-2">
+            <div class="flex items-center justify-between py-1 border-b border-slate-200/60">
+              <span class="text-slate-600">Recibo_Mensalidade_Maio.pdf</span>
+              <span class="text-[10px] font-semibold text-[#1B4166] bg-[#eaf3f9] px-1.5 py-0.5 rounded">Gerado</span>
+            </div>
+            <div class="flex items-center justify-between py-1">
+              <span class="text-slate-600">Declaracao_Aulas_2026.pdf</span>
+              <span class="text-[10px] font-semibold text-[#1B4166] bg-[#eaf3f9] px-1.5 py-0.5 rounded">Gerado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Impostos e Despesas do MEI -->
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-subtle flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold text-brand uppercase tracking-wider">Obrigações</span>
+              <i class="ph-bold ph-calculator text-brand text-xl"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-slate-900 mb-2">Controle MEI e Despesas</h4>
+            <p class="text-sm text-slate-600 mb-6 leading-relaxed">
+              Acompanhe o faturamento acumulado do seu MEI para não ultrapassar o limite anual e controle o pagamento da sua guia DAS mensal.
+            </p>
+          </div>
+          <!-- Mini UI Mock -->
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs space-y-2">
+            <div class="flex justify-between items-center py-1 border-b border-slate-200/60">
+              <span class="text-slate-600">Limite anual MEI</span>
+              <span class="font-mono font-semibold text-slate-800">42% utilizado</span>
+            </div>
+            <div class="flex justify-between items-center py-1">
+              <span class="text-slate-600">Guia DAS do mês</span>
+              <span class="inline-flex items-center gap-1 text-[#1B4166] font-semibold">
+                <i class="ph-bold ph-check text-xs text-[#9DC3DE]"></i> Em dia
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. TAGLINE ANIMADA OBRIGATÓRIA (B11) -->
+    <!-- Text starts in subtle muted tone, activates word by word on scroll with custom bezier -->
+    <section class="py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center border-y border-slate-100 reveal-elem" aria-label="Manifesto MAEZTRO">
+      <div id="tagline-container" class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-snug max-w-[680px] mx-auto text-slate-900" style="text-wrap: balance;">
+        <!-- Inserção com quebra semântica, sem hífens -->
+        <span class="word-token">Menos</span>
+        <span class="word-token">tempo</span>
+        <span class="word-token">em</span>
+        <span class="word-token">planilhas</span>
+        <span class="word-token">e</span>
+        <span class="word-token">cobranças.</span>
+        <br class="hidden sm:inline">
+        <span class="word-token">Mais</span>
+        <span class="word-token">foco</span>
+        <span class="word-token">na</span>
+        <span class="word-token">música</span>
+        <span class="word-token">e</span>
+        <span class="word-token">na</span>
+        <span class="word-token">evolução</span>
+        <span class="word-token">dos</span>
+        <span class="word-token">seus</span>
+        <span class="word-token">alunos.</span>
+      </div>
+      <p class="mt-6 text-sm text-slate-500 font-medium tracking-wide">
+        Feito sob medida para quem ensina instrumentos, técnica vocal e teoria musical.
+      </p>
+    </section>
+
+    <!-- 8. ESPAÇO PARA PROVA SOCIAL REAL (Sem inventar clientes ou depoimentos fakes) -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center reveal-elem">
+      <div class="p-8 sm:p-12 rounded-2xl border border-slate-200 bg-brand-surface shadow-subtle">
+        <div class="w-12 h-12 rounded-full bg-[#eaf3f9] text-brand flex items-center justify-center text-xl mx-auto mb-4">
+          <i class="ph-bold ph-users-three"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-slate-900 mb-3" style="text-wrap: balance;">
+          Junte-se aos primeiros professores da turma de lançamento
+        </h3>
+        <p class="text-base text-slate-600 max-w-xl mx-auto leading-relaxed mb-6" style="text-wrap: pretty;">
+          Estamos abrindo as vagas do MAEZTRO Gestão para educadores musicais independentes em todo o Brasil. Comece agora sem custo durante o período inicial e participe da evolução contínua da ferramenta.
+        </p>
+        <div class="inline-flex items-center gap-2 text-xs font-semibold text-slate-500 bg-white px-4 py-2 rounded-full border border-slate-200 shadow-sm">
+          <i class="ph-bold ph-seal-check text-[#1B4166]"></i>
+          Ambiente seguro com suporte direto via WhatsApp
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. TRATAMENTO DE OBJEÇÕES -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto reveal-elem">
+      <div class="text-center max-w-[680px] mx-auto mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand mb-2">Sem Complicações</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight" style="text-wrap: balance;">
+          Dúvidas sobre adotar um aplicativo no seu dia a dia?
+        </h3>
+        <p class="mt-4 text-base sm:text-lg text-slate-600 font-normal" style="text-wrap: pretty;">
+          Respondemos com total transparência para que você tome a melhor decisão para o seu trabalho.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-subtle">
+          <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-brand text-xl mb-4">
+            <i class="ph-bold ph-device-mobile"></i>
+          </div>
+          <h4 class="text-base font-semibold text-slate-900 mb-2">É difícil de aprender?</h4>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Não. O aplicativo foi desenhado para quem não quer perder tempo com informática. Em menos de 10 minutos seus alunos e horários já estão cadastrados.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-subtle">
+          <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-brand text-xl mb-4">
+            <i class="ph-bold ph-lock-key"></i>
+          </div>
+          <h4 class="text-base font-semibold text-slate-900 mb-2">Meus dados estão seguros?</h4>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Sim. Utilizamos servidores protegidos e criptografia padrão de mercado. Seus contatos de alunos e históricos financeiros são estritamente confidenciais.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white shadow-subtle">
+          <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-brand text-xl mb-4">
+            <i class="ph-bold ph-arrows-clockwise"></i>
+          </div>
+          <h4 class="text-base font-semibold text-slate-900 mb-2">Preciso trocar de contador?</h4>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Não. O MAEZTRO organiza sua rotina operacional diária. Você pode inclusive exportar relatórios para enviar ao seu contador na hora da declaração.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. FAQ (6 a 12 perguntas completas e objetivas) -->
+    <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto reveal-elem">
+      <div class="text-center max-w-[680px] mx-auto mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand mb-2">Tire suas dúvidas</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight" style="text-wrap: balance;">
+          Perguntas Frequentes
+        </h3>
+        <p class="mt-4 text-base sm:text-lg text-slate-600 font-normal" style="text-wrap: pretty;">
+          Esclareça tudo sobre o funcionamento, valores, notas fiscais e cancelamento.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- FAQ Item 1 -->
+        <div class="border border-slate-200 rounded-xl overflow-hidden bg-white">
+          <button type="button" class="faq-toggle w-full p-5 text-left font-semibold text-slate-900 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-brand focus:ring-inset" aria-expanded="false">
+            <span>Como funciona o período de teste de 14 dias?</span>
+            <i class="ph-bold ph-caret-down text-slate-400 transition-transform duration-500 ease-spring faq-icon"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+            Você tem acesso completo e irrestrito a todas as funcionalidades do aplicativo durante 14 dias corridos. Não solicitamos cartão de crédito no momento do cadastro. Se não desejar continuar após o período, sua conta é pausada automaticamente.
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="border border-slate-200 rounded-xl overflow-hidden bg-white">
+          <button type="button" class="faq-toggle w-full p-5 text-left font-semibold text-slate-900 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-brand focus:ring-inset" aria-expanded="false">
+            <span>Quanto custa o MAEZTRO após o período de teste?</span>
+            <i class="ph-bold ph-caret-down text-slate-400 transition-transform duration-500 ease-spring faq-icon"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+            O plano profissional para professores individuais custa a partir de R$ 39,90 por mês, sem contratos de fidelidade. Você conta com alunos ilimitados, controle financeiro completo e emissão de recibos.
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="border border-slate-200 rounded-xl overflow-hidden bg-white">
+          <button type="button" class="faq-toggle w-full p-5 text-left font-semibold text-slate-900 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-brand focus:ring-inset" aria-expanded="false">
+            <span>Posso usar o aplicativo pelo celular?</span>
+            <i class="ph-bold ph-caret-down text-slate-400 transition-transform duration-500 ease-spring faq-icon"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+            Sim. O aplicativo funciona perfeitamente em qualquer smartphone através do navegador ou como aplicativo web instalado na tela inicial, além de rodar em tablets e computadores.
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="border border-slate-200 rounded-xl overflow-hidden bg-white">
+          <button type="button" class="faq-toggle w-full p-5 text-left font-semibold text-slate-900 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-brand focus:ring-inset" aria-expanded="false">
+            <span>O sistema emite notas fiscais e recibos?</span>
+            <i class="ph-bold ph-caret-down text-slate-400 transition-transform duration-500 ease-spring faq-icon"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+            O sistema gera recibos profissionais detalhados em formato PDF para comprovação de pagamento dos responsáveis. Para emissão de notas fiscais de serviços MEI, disponibilizamos relatórios pré formatados compatíveis com o portal nacional do governo.
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="border border-slate-200 rounded-xl overflow-hidden bg-white">
+          <button type="button" class="faq-toggle w-full p-5 text-left font-semibold text-slate-900 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-brand focus:ring-inset" aria-expanded="false">
+            <span>Como é realizado o atendimento e suporte?</span>
+            <i class="ph-bold ph-caret-down text-slate-400 transition-transform duration-500 ease-spring faq-icon"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+            Nosso suporte é humanizado e realizado diretamente via WhatsApp e e-mail por especialistas que entendem a realidade de aulas de música, com atendimento de segunda a sexta em horário comercial.
+          </div>
+        </div>
+
+        <!-- FAQ Item 6 -->
+        <div class="border border-slate-200 rounded-xl overflow-hidden bg-white">
+          <button type="button" class="faq-toggle w-full p-5 text-left font-semibold text-slate-900 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-brand focus:ring-inset" aria-expanded="false">
+            <span>Como funciona o cancelamento?</span>
+            <i class="ph-bold ph-caret-down text-slate-400 transition-transform duration-500 ease-spring faq-icon"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+            O cancelamento pode ser feito a qualquer momento diretamente no painel da sua conta, sem cobrança de multas ou taxas adicionais. Seus relatórios podem ser exportados antes do encerramento.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. FORMULÁRIO DE AGENDAMENTO / INSCRIÇÃO (Formspree) -->
+    <section id="formulario" class="py-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto reveal-elem">
+      <div class="p-8 sm:p-12 rounded-3xl border border-slate-200 bg-white shadow-card">
+        
+        <div class="text-center max-w-[580px] mx-auto mb-8">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-brand mb-2">Comece Agora</h2>
+          <h3 class="text-3xl font-bold text-slate-900 leading-tight" style="text-wrap: balance;">
+            Inicie seu teste gratuito por 14 dias
+          </h3>
+          <p class="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed" style="text-wrap: pretty;">
+            Preencha seus dados para receber o acesso imediato ao ambiente do MAEZTRO Gestão.
+          </p>
+        </div>
+
+        <!-- Formspree Form -->
+        <form id="lead-form" action="https://formspree.io/f/mjyvjoew" method="POST" class="space-y-6">
+          
+          <!-- Nome -->
+          <div>
+            <label for="nome" class="block text-sm font-semibold text-slate-700 mb-1.5">Nome completo *</label>
+            <input type="text" id="nome" name="nome" required placeholder="Ex: Rodrigo Mendonça" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all">
+            <span class="text-xs text-rose-600 mt-1 hidden field-error" id="error-nome">Por favor, informe seu nome completo.</span>
+          </div>
+
+          <!-- WhatsApp -->
+          <div>
+            <label for="whatsapp" class="block text-sm font-semibold text-slate-700 mb-1.5">WhatsApp com DDD *</label>
+            <input type="tel" id="whatsapp" name="whatsapp" required placeholder="(11) 98765-4321" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all">
+            <span class="text-xs text-rose-600 mt-1 hidden field-error" id="error-whatsapp">Informe um número de WhatsApp válido com DDD.</span>
+          </div>
+
+          <!-- Tipo de Negócio -->
+          <div>
+            <label for="tipo_negocio" class="block text-sm font-semibold text-slate-700 mb-1.5">Tipo de negócio ou atuação *</label>
+            <select id="tipo_negocio" name="tipo_negocio" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all bg-white">
+              <option value="" disabled selected>Selecione sua atuação principal</option>
+              <option value="Professor autônomo individual">Professor autônomo individual</option>
+              <option value="MEI com estúdio próprio">MEI com estúdio próprio</option>
+              <option value="Aulas particulares a domicílio">Aulas particulares a domicílio</option>
+            </select>
+            <span class="text-xs text-rose-600 mt-1 hidden field-error" id="error-tipo">Selecione uma opção de atuação.</span>
+          </div>
+
+          <!-- Faturamento Aproximado -->
+          <div>
+            <label for="faturamento" class="block text-sm font-semibold text-slate-700 mb-1.5">Faturamento mensal aproximado com aulas *</label>
+            <select id="faturamento" name="faturamento" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all bg-white">
+              <option value="" disabled selected>Selecione a faixa aproximada</option>
+              <option value="Até R$ 2.000 / mês">Até R$ 2.000 por mês</option>
+              <option value="De R$ 2.000 a R$ 5.000 / mês">De R$ 2.000 a R$ 5.000 por mês</option>
+              <option value="De R$ 5.000 a R$ 10.000 / mês">De R$ 5.000 a R$ 10.000 por mês</option>
+              <option value="Acima de R$ 10.000 / mês">Acima de R$ 10.000 por mês</option>
+            </select>
+            <span class="text-xs text-rose-600 mt-1 hidden field-error" id="error-faturamento">Selecione uma faixa de faturamento.</span>
+          </div>
+
+          <!-- Submit Button: Only primary CTA -->
+          <div class="pt-2">
+            <button id="submit-btn" type="submit" class="w-full flex items-center justify-center bg-brand hover:bg-brand-dark active:scale-[0.98] text-white text-base font-semibold px-6 py-3.5 rounded-xl transition-all duration-700 ease-spring shadow-card focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2">
+              <span id="btn-text">Teste gratuito por 14 dias</span>
+              <span id="btn-loading" class="hidden items-center gap-2">
+                <i class="ph-bold ph-circle-notch animate-spin text-lg"></i>
+                Enviando solicitação...
+              </span>
+            </button>
+          </div>
+
+          <!-- Feedback messages -->
+          <div id="form-feedback" class="hidden p-4 rounded-xl text-sm font-medium"></div>
+
+          <!-- Terms note -->
+          <p class="text-xs text-center text-slate-500 leading-relaxed">
+            Ao solicitar o teste, você concorda com nossos Termos de Uso e Política de Privacidade. Não enviamos spam.
+          </p>
+        </form>
+
+      </div>
+    </section>
+
+    <!-- 12. CTA FINAL (Idêntico ao topo) -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center reveal-elem">
+      <div class="p-10 sm:p-16 rounded-3xl border border-slate-200 bg-brand-surface shadow-card">
+        <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight leading-tight max-w-[680px] mx-auto mb-4" style="text-wrap: balance;">
+          Pronto para transformar a gestão das suas aulas de música?
+        </h3>
+        <p class="text-base sm:text-lg text-slate-600 font-normal max-w-[680px] mx-auto mb-8 leading-relaxed" style="text-wrap: pretty;">
+          Experimente a tranquilidade de ter todos os alunos, datas e pagamentos reunidos em uma ferramenta simples e confiável.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#formulario" class="w-full sm:w-auto inline-flex items-center justify-center bg-brand hover:bg-brand-dark active:scale-[0.98] text-white text-base font-semibold px-8 py-3 rounded-xl transition-all duration-700 ease-spring shadow-card focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2">
+            Teste gratuito por 14 dias
+          </a>
+        </div>
+        <div class="mt-6 text-xs text-slate-500 font-medium">
+          Acesso imediato • Sem necessidade de cartão de crédito
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="foot">
-    <span>&copy; <span id="year"></span> GestFors. Todos os direitos reservados.</span>
+  <!-- 13. RODAPÉ COM PRIVACIDADE E TERMOS -->
+  <footer class="border-t border-slate-200 bg-white py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <img src="./logo-maeztro.png" alt="Logo MAEZTRO Gestão" class="h-14 w-auto object-contain">
+        <div>
+          <span class="text-xs text-slate-600">Gestão simplificada para professores de música</span>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-600 font-medium">
+        <a href="#politica-privacidade" id="open-privacy" class="hover:text-brand transition-colors">Política de Privacidade</a>
+        <span class="text-slate-300">•</span>
+        <a href="#termos-uso" id="open-terms" class="hover:text-brand transition-colors">Termos de Uso</a>
+        <span class="text-slate-300">•</span>
+        <a href="mailto:ola@gestfors.com.br" class="hover:text-brand transition-colors">Suporte: ola@gestfors.com.br</a>
+      </div>
+
+      <div class="text-xs text-slate-400 text-center md:text-right">
+        &copy; <span id="current-year">2026</span> GestFors - Soluções digitais. Todos os direitos reservados.
+      </div>
+    </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <!-- Modal Simples de Política de Privacidade / Termos para cumprir os links sem dead links -->
+  <div id="legal-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-card max-h-[80vh] overflow-y-auto border border-slate-200">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <h4 id="modal-title" class="text-lg font-bold text-slate-900">Termos e Condições</h4>
+        <button id="close-modal" type="button" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100" aria-label="Fechar janela">
+          <i class="ph-bold ph-x text-lg"></i>
+        </button>
+      </div>
+      <div id="modal-body" class="py-4 text-sm text-slate-600 leading-relaxed space-y-3">
+        <!-- Conteúdo dinâmico preenchido via script -->
+      </div>
+      <div class="pt-4 border-t border-slate-100 text-right">
+        <button id="modal-ok-btn" type="button" class="px-5 py-2 bg-brand text-white rounded-xl text-sm font-semibold hover:bg-brand-dark">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comportamentos e interações da Landing Page -->
+  <script src="./script.js"></script>
 </body>
 </html>
